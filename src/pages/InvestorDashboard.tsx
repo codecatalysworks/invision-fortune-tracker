@@ -21,6 +21,8 @@ const mockInvestments = [
     profit: 5000,
     status: 'active' as const,
     profitability: 20,
+    startDate: '2023-05-15',
+    endDate: '2024-05-15',
     imageSrc: 'https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80'
   },
   {
@@ -31,6 +33,8 @@ const mockInvestments = [
     profit: 15000,
     status: 'active' as const,
     profitability: 7.5,
+    startDate: '2022-10-20',
+    endDate: '2025-10-20',
     imageSrc: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1073&q=80'
   },
   {
@@ -41,8 +45,46 @@ const mockInvestments = [
     profit: 30000,
     status: 'active' as const,
     profitability: 20,
+    startDate: '2023-01-10',
+    endDate: '2025-01-10',
     imageSrc: 'https://images.unsplash.com/photo-1525609004556-c46c7d6cf023?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1152&q=80'
   }
+];
+
+// Mock data for charts
+const mockProfitData = [
+  { name: 'Jan', profit: 12000 },
+  { name: 'Feb', profit: 19000 },
+  { name: 'Mar', profit: 17000 },
+  { name: 'Apr', profit: 21000 },
+  { name: 'May', profit: 24000 },
+  { name: 'Jun', profit: 28000 },
+];
+
+const mockCategoryData = [
+  { name: 'Wine', value: 50000, color: '#7E2553' },
+  { name: 'Real Estate', value: 120000, color: '#5D4037' },
+  { name: 'Cars', value: 30000, color: '#1976D2' },
+];
+
+// Mock events data
+const mockEvents = [
+  {
+    id: 'e1',
+    title: 'Wine Collection Matures',
+    date: '2024-05-15',
+    type: 'completion' as const,
+    investmentId: '1',
+    investmentType: 'wine',
+  },
+  {
+    id: 'e2',
+    title: 'Car Collection Valuation',
+    date: '2023-07-10',
+    type: 'valuation' as const,
+    investmentId: '3',
+    investmentType: 'cars',
+  },
 ];
 
 const InvestorDashboard = () => {
@@ -69,21 +111,21 @@ const InvestorDashboard = () => {
             title="Total Investment"
             value="$375,000"
             description="+12% from last month"
-            icon={<CircleDollarSign className="h-4 w-4 text-muted-foreground" />}
+            icon={CircleDollarSign}
           />
           
           <StatCard
             title="Total Profit"
             value="$45,000"
             description="+5.2% from last month"
-            icon={<Wallet className="h-4 w-4 text-muted-foreground" />}
+            icon={Wallet}
           />
           
           <StatCard
             title="ROI"
             value="12%"
             description="Annualized return"
-            icon={<PieChart className="h-4 w-4 text-muted-foreground" />}
+            icon={PieChart}
           />
         </div>
         
@@ -103,7 +145,7 @@ const InvestorDashboard = () => {
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <ProfitChart />
+                  <ProfitChart data={mockProfitData} />
                 </CardContent>
               </Card>
               
@@ -115,7 +157,7 @@ const InvestorDashboard = () => {
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <CategoryDistribution />
+                  <CategoryDistribution data={mockCategoryData} />
                 </CardContent>
               </Card>
             </div>
@@ -126,7 +168,7 @@ const InvestorDashboard = () => {
                 <Clock className="h-4 w-4 text-muted-foreground" />
               </CardHeader>
               <CardContent>
-                <UpcomingEvents />
+                <UpcomingEvents events={mockEvents} />
               </CardContent>
             </Card>
           </TabsContent>
