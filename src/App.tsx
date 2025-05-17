@@ -11,8 +11,12 @@ import Register from "./pages/Register";
 import InvestorDashboard from "./pages/InvestorDashboard";
 import NotFound from "./pages/NotFound";
 import Investments from "./pages/Investments";
+import InvestmentDetail from "./pages/InvestmentDetail";
 import Proposals from "./pages/Proposals";
 import Admin from "./pages/Admin";
+import Calendar from "./pages/Calendar";
+import ManageInvestors from "./pages/ManageInvestors";
+import CreateInvestment from "./pages/CreateInvestment";
 
 const queryClient = new QueryClient();
 
@@ -78,9 +82,19 @@ const App = () => {
                 <Investments />
               </RequireAuth>
             } />
+            <Route path="/investments/:type/:id" element={
+              <RequireAuth>
+                <InvestmentDetail />
+              </RequireAuth>
+            } />
             <Route path="/proposals" element={
               <RequireAuth>
                 <Proposals />
+              </RequireAuth>
+            } />
+            <Route path="/calendar" element={
+              <RequireAuth>
+                <Calendar />
               </RequireAuth>
             } />
             
@@ -88,6 +102,21 @@ const App = () => {
             <Route path="/admin" element={
               <RequireAdmin>
                 <Admin />
+              </RequireAdmin>
+            } />
+            <Route path="/admin/investors" element={
+              <RequireAdmin>
+                <ManageInvestors />
+              </RequireAdmin>
+            } />
+            <Route path="/admin/calendar" element={
+              <RequireAdmin>
+                <Calendar />
+              </RequireAdmin>
+            } />
+            <Route path="/admin/create-investment" element={
+              <RequireAdmin>
+                <CreateInvestment />
               </RequireAdmin>
             } />
             <Route path="/admin/*" element={

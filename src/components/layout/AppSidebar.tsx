@@ -30,7 +30,7 @@ import {
 import { cn } from "@/lib/utils";
 
 export function AppSidebar() {
-  const { isCollapsed } = useSidebar();
+  const { collapsed } = useSidebar();
   const location = useLocation();
   const currentPath = location.pathname;
 
@@ -39,6 +39,7 @@ export function AppSidebar() {
     { title: "Dashboard", url: "/", icon: LayoutDashboard },
     { title: "Proposals", url: "/proposals", icon: Vote },
     { title: "History", url: "/history", icon: Clock },
+    { title: "Calendar", url: "/calendar", icon: Calendar },
   ];
 
   // Investment type items
@@ -78,16 +79,15 @@ export function AppSidebar() {
     <Sidebar
       className={cn(
         "border-r bg-sidebar",
-        isCollapsed ? "w-16" : "w-64"
+        collapsed ? "w-16" : "w-64"
       )}
     >
       <SidebarContent>
         <SidebarGroup
-          open={isDashboardExpanded}
-          onOpenChange={() => {}}
+          defaultOpen={isDashboardExpanded}
         >
           <SidebarGroupLabel className="text-sm font-medium">
-            {!isCollapsed && "Dashboard"}
+            {!collapsed && "Dashboard"}
           </SidebarGroupLabel>
 
           <SidebarGroupContent>
@@ -97,7 +97,7 @@ export function AppSidebar() {
                   <SidebarMenuButton asChild>
                     <NavLink to={item.url} end={item.url === "/"} className={getNavClass}>
                       <item.icon className="h-5 w-5 shrink-0" />
-                      {!isCollapsed && <span>{item.title}</span>}
+                      {!collapsed && <span>{item.title}</span>}
                     </NavLink>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
@@ -107,11 +107,10 @@ export function AppSidebar() {
         </SidebarGroup>
 
         <SidebarGroup
-          open={isInvestmentsExpanded}
-          onOpenChange={() => {}}
+          defaultOpen={isInvestmentsExpanded}
         >
           <SidebarGroupLabel className="text-sm font-medium">
-            {!isCollapsed && "Investments"}
+            {!collapsed && "Investments"}
           </SidebarGroupLabel>
 
           <SidebarGroupContent>
@@ -126,7 +125,7 @@ export function AppSidebar() {
                           item.color && `text-${item.color}`
                         )} 
                       />
-                      {!isCollapsed && <span>{item.title}</span>}
+                      {!collapsed && <span>{item.title}</span>}
                     </NavLink>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
@@ -136,11 +135,10 @@ export function AppSidebar() {
         </SidebarGroup>
 
         <SidebarGroup
-          open={isAdminExpanded}
-          onOpenChange={() => {}}
+          defaultOpen={isAdminExpanded}
         >
           <SidebarGroupLabel className="text-sm font-medium">
-            {!isCollapsed && "Admin"}
+            {!collapsed && "Admin"}
           </SidebarGroupLabel>
 
           <SidebarGroupContent>
@@ -150,7 +148,7 @@ export function AppSidebar() {
                   <SidebarMenuButton asChild>
                     <NavLink to={item.url} className={getNavClass}>
                       <item.icon className="h-5 w-5 shrink-0" />
-                      {!isCollapsed && <span>{item.title}</span>}
+                      {!collapsed && <span>{item.title}</span>}
                     </NavLink>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
